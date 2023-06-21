@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import Navigation from "./routes/navigation/navigation";
+import Home from "./pages/Home";
+import GlobalStyle from "./GlobalStyle";
+import Footer from "./components/Footer/Footer";
+import Headphones from "./pages/Category/Headphones";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import Speakers from "./pages/Category/Speakers";
+import Earphones from "./pages/Category/Earphones";
+import CartModal from "./components/CartModal/CartModal";
+import ProductDetail from "./pages/ProductDetail";
+import Checkout from "./components/Checkout/Checkout";
 
-function App() {
+const App = () => {
+  AOS.init({
+    once: true,
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyle />
+      <CartModal />
+      <Routes>
+        <Route path="/" element={<Navigation />}>
+          <Route index element={<Home />} />
+          <Route path="/headphones" element={<Headphones />} />
+          <Route path="/speakers" element={<Speakers />} />
+          <Route path="/earphones" element={<Earphones />} />
+          <Route path="/product_detail/:id" element={<ProductDetail />} />
+          <Route path="/checkout" element={<Checkout />} />
+        </Route>
+      </Routes>
+      <Footer />
+    </>
   );
-}
+};
 
 export default App;
